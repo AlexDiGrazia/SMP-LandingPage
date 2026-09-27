@@ -13,7 +13,7 @@ export default function Hero() {
           Natural-looking SMP for receding hairlines, thinning and hair loss — performed personally by Karl, an
           experienced SMP artist. No salespeople. No call center.
         </p>
-        <div className="btn-row">
+        <div className="btn-row" id="hero-cta">
           <a href="#consult" className="btn btn-primary">
             Get Your Free Consultation
           </a>

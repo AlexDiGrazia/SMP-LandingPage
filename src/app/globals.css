@@ -834,7 +834,7 @@ img {
 }
 
 @media (max-width: 767px) {
-  .sticky-bar {
+  .sticky-bar.is-visible {
     display: grid;
   }
   body {
