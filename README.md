@@ -1,21 +1,39 @@
-# Handoff: SMP Scottsdale — Meta Ads Landing Page
+# SMP Scottsdale — Meta Ads Landing Page
 
 ## Overview
 Single-page, mobile-first lead-gen landing page for a scalp micropigmentation (SMP) artist ("Karl") in Scottsdale, AZ. Funnel: Meta ad → landing page → lead form → Karl calls personally. No online booking, no nav menu, no blog. Includes a dedicated thank-you page.
 
-## About the Design Files
-`SMP Landing Page.dc.html` is a **design reference built in HTML** — it shows intended look and behavior, not production code. Recreate it in **Next.js (App Router) + TypeScript** (recommended: SSG for speed, route-level `/thank-you` page for conversion tracking, API route for form submissions). Open the HTML file directly in a browser to view it.
+## Status
+Built as a real Next.js 16 (App Router) + TypeScript app — `SMP Landing Page.dc.html` was the original design reference (kept for history; not used at runtime). Layout, type, color and the two-step lead form are implemented and working end-to-end (tested: submit → `/api/lead` → `/thank-you`). Still needed before launch:
+- Real photos (hero, results gallery, Karl's portrait) — see "Adding real photos" below
+- Real copy: anything in `[brackets]` in `src/lib/content.ts` (reviews, stats, bio, pricing range — flag in `Pricing.tsx` notes a $1,500 vs $1,800 discrepancy between the job listing and design spec to confirm with Karl)
+- `RESEND_API_KEY` / `NEXT_PUBLIC_META_PIXEL_ID` / `NEXT_PUBLIC_GA_ID` env vars (see `.env.example`)
+- Meta Conversions API server-side event (stubbed with a `TODO` in `src/app/api/lead/route.ts`)
+
+## Getting Started
+```
+npm install
+cp .env.example .env.local   # fill in as accounts are created
+npm run dev                   # http://localhost:3000
+```
+`npm run build && npm run lint` before shipping — both are clean as of this commit.
+
+## Adding real photos
+Drop files in `/public` and pass their path to the relevant component:
+- Hero + results gallery: `beforeSrc`/`afterSrc` props on `<BeforeAfterPair>` (`src/components/BeforeAfterPair.tsx`)
+- Karl's portrait: swap the placeholder `<span>` in `src/components/AboutKarl.tsx` for a `next/image`
+Until real files are supplied, components fall back to the striped placeholder boxes from the original design reference.
 
 ## Fidelity
 **High-fidelity layout, type, color and interactions.** Content is partly placeholder: anything in `[brackets]` and all striped image boxes are stubs awaiting client assets.
 
-## Recommended Stack
-- Next.js 14+ App Router, TypeScript, Tailwind CSS (or CSS Modules)
-- `next/font/google` for Archivo, Archivo Narrow, JetBrains Mono
-- `next/image` for all photos (WebP/AVIF, lazy below fold, hero `priority`)
-- Form: React Hook Form + Zod; submit to `/api/lead` → email via Resend/Postmark; photos to S3/R2/Vercel Blob (or email attachments if small)
-- Hosting: Vercel (SSL + custom domain). Client owns repo, domain, hosting and email accounts.
-- Tracking: Meta Pixel + Conversions API (server-side, dedup with `event_id`), GA4 via `@next/third-parties`
+## Stack (as built)
+- Next.js 16 App Router, TypeScript, plain CSS (tokens + section classes in `globals.css` — no Tailwind, ported straight from the design reference's inline styles)
+- `next/font/google` for Archivo, Archivo Narrow, JetBrains Mono (self-hosted, no runtime request to Google)
+- `next/image` for photos once real assets are added (see "Adding real photos")
+- Form: plain `useState` + manual validation (no RHF/Zod needed for 6 fields) → `FormData` POST to `/api/lead` → email via Resend's HTTP API (no SDK dependency) if `RESEND_API_KEY` is set, photos attached directly (skip S3/R2 — fine at this volume/size); logs to console otherwise so local dev works without keys
+- Hosting: Vercel (SSL + custom domain). Client owns repo, domain, hosting and email accounts — nothing proprietary.
+- Tracking: Meta Pixel client-side + a stubbed-out Conversions API call (same `event_id`, fired from `/thank-you` not the submit handler, so it's tied to a real page view), GA4 via `gtag.js`, UTM/fbclid captured to `sessionStorage` on landing
 
 ## Page Structure (in order)
 Max content width 1200px, side padding 20px. Section vertical padding 64–96px. Dark sections `#0f0e0d`; light sections `#f3f1ec`.
@@ -72,4 +90,11 @@ Other: radius 2px everywhere; no shadows; CTA height 56–58px (sticky 50); tap 
 Logo, hero before/after, 6–10 before/after pairs + captions, Karl portrait, review excerpts + full testimonials, rating/review count, years/clients stats, bio, phone (placeholder `(480) 555-0123`), brand name, address.
 
 ## Files
-- `SMP Landing Page.dc.html` — full design reference (open in browser). Copy and section structure live in the template; list content (reviews, steps, results, options) is in the logic class `renderVals()`.
+- `SMP Landing Page.dc.html` — original design reference (open in browser). Superseded by the Next.js app below; kept for history.
+- `src/app/page.tsx` — assembles the one-page layout from `src/components/*`
+- `src/app/thank-you/page.tsx`, `src/app/api/lead/route.ts` — post-submit page and lead-handling endpoint (email + CAPI TODOs inline)
+- `src/app/layout.tsx` — fonts, metadata, Meta Pixel / GA4 script wiring
+- `src/app/globals.css` — design tokens (colors, type, spacing) and all section styles, plain CSS
+- `src/lib/content.ts` — all copy/business info in one place (phone, address, reviews, results captions, form options) — edit here first
+- `src/lib/track.ts` — `track()` helper (fbq + gtag) and UTM/fbclid capture
+- `src/components/LeadForm.tsx` — the two-step form (client component)
