@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=Archivo+Narrow:wght@500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0f0e0d;color:#f3f1ec;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:oklch(0.8 0.07 70);text-decoration:none}a:hover{color:#f3f1ec}
+*{box-sizing:border-box}
+input,textarea{font-family:inherit}
+</style>
+</helmet>
+
+<sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Thank You" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 20px;background:#0f0e0d">
+  <div style="max-width:560px;display:flex;flex-direction:column;gap:24px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:oklch(0.8 0.07 70);text-transform:uppercase">Request received</div>
+    <h1 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(40px,7vw,64px);line-height:1;letter-spacing:-.01em;text-transform:uppercase">Thanks, {{ firstName }}. I'll be in touch personally.</h1>
+    <p style="margin:0;font-size:18px;line-height:1.55;color:#bdb8ae;text-wrap:pretty">I review every request myself — your photos, your goals, your hairstyle. Expect a call or text from me within one business day to set up your free consultation.</p>
+    <p style="margin:0;font-size:16px;line-height:1.55;color:#bdb8ae">— Karl</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+      <a href="tel:4805550123" onClick="{{ trackCall }}" style="display:flex;align-items:center;justify-content:center;min-height:56px;padding:0 28px;background:oklch(0.8 0.07 70);color:#0f0e0d;font-weight:600;font-size:17px;border-radius:2px">Call Karl now · (480) 555-0123</a>
+      <button onClick="{{ reset }}" style="min-height:56px;padding:0 24px;background:transparent;color:#f3f1ec;border:1px solid #3a3733;font-size:15px;cursor:pointer;border-radius:2px;font-family:inherit">Back to page</button>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+<div style="padding-bottom:{{ stickyPad }}">
+
+<header style="position:sticky;top:0;z-index:20;background:rgba(15,14,13,.92);backdrop-filter:blur(8px);border-bottom:1px solid #22201d">
+  <div style="max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:32px;height:32px;border:1px dashed #55504a;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#8a857c">LOGO</div>
+      <div style="font-family:'Archivo Narrow',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:15px">[Brand] SMP <span style="color:#8a857c;font-weight:500">Scottsdale</span></div>
+    </div>
+    <a href="tel:4805550123" onClick="{{ trackCall }}" style="font-size:15px;font-weight:600;display:flex;align-items:center;min-height:44px">(480) 555-0123</a>
+  </div>
+</header>
+
+<section data-screen-label="01 Hero" style="max-width:1200px;margin:0 auto;padding:40px 20px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:40px;align-items:center">
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:oklch(0.8 0.07 70);text-transform:uppercase">Scalp Micropigmentation · Scottsdale, AZ</div>
+    <h1 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(44px,7.5vw,84px);line-height:.95;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance">A hairline nobody questions.</h1>
+    <p style="margin:0;font-size:clamp(17px,2vw,20px);line-height:1.5;color:#bdb8ae;max-width:520px;text-wrap:pretty">Natural-looking SMP for receding hairlines, thinning and hair loss — performed personally by Karl, an experienced SMP artist. No salespeople. No call center.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <button onClick="{{ goForm }}" style="min-height:56px;padding:0 28px;background:oklch(0.8 0.07 70);color:#0f0e0d;border:none;font-weight:600;font-size:17px;cursor:pointer;border-radius:2px;font-family:inherit">Get Your Free Consultation</button>
+      <a href="tel:4805550123" onClick="{{ trackCall }}" style="display:flex;align-items:center;white-space:nowrap;flex-shrink:0;min-height:56px;padding:0 24px;border:1px solid #3a3733;color:#f3f1ec;font-size:16px;font-weight:500;border-radius:2px">Call Karl</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:#bdb8ae">
+      <span style="color:oklch(0.8 0.07 70);letter-spacing:2px">★★★★★</span>
+      <span>[4.9] on Google · [120+] reviews</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;aspect-ratio:4/3.4">
+    <div style="position:relative;background:repeating-linear-gradient(135deg,#1a1917 0 10px,#1f1e1b 10px 20px);display:flex;align-items:flex-end;padding:12px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8a857c">hero — BEFORE</span>
+    </div>
+    <div style="position:relative;background:repeating-linear-gradient(135deg,#1a1917 0 10px,#1f1e1b 10px 20px);display:flex;align-items:flex-end;padding:12px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8a857c">hero — AFTER</span>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="02 Social Proof" style="border-top:1px solid #22201d;border-bottom:1px solid #22201d">
+  <div style="max-width:1200px;margin:0 auto;padding:28px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+    <sc-for list="{{ proofQuotes }}" as="q" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:16px;line-height:1.45;color:#f3f1ec;text-wrap:pretty">"{{ q.text }}"</div>
+        <div style="font-size:13px;color:#8a857c">{{ q.name }}</div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="03 Results" style="max-width:1200px;margin:0 auto;padding:80px 20px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:32px">
+    <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(34px,5vw,56px);line-height:1;text-transform:uppercase">Real results</h2>
+    <p style="margin:0;color:#bdb8ae;font-size:16px;max-width:360px">Real Karl clients, no filters or retouching.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:20px">
+    <sc-for list="{{ results }}" as="r" hint-placeholder-count="8">
+      <figure style="margin:0;display:flex;flex-direction:column;gap:10px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;aspect-ratio:4/2.6">
+          <div style="background:repeating-linear-gradient(135deg,#1a1917 0 10px,#1f1e1b 10px 20px);display:flex;align-items:flex-end;padding:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8a857c">BEFORE</span></div>
+          <div style="background:repeating-linear-gradient(135deg,#1a1917 0 10px,#1f1e1b 10px 20px);display:flex;align-items:flex-end;padding:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8a857c">AFTER</span></div>
+        </div>
+        <figcaption style="font-size:14px;color:#bdb8ae">{{ r }}</figcaption>
+      </figure>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="04 About Karl" style="background:#f3f1ec;color:#151412">
+  <div style="max-width:1200px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px;align-items:center">
+    <div style="aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#e6e3dc 0 10px,#dedad2 10px 20px);display:flex;align-items:flex-end;padding:14px;max-width:480px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6b665e">portrait — Karl at work</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:540px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:#6b5a3e;text-transform:uppercase">Your artist</div>
+      <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(34px,5vw,56px);line-height:1;text-transform:uppercase">You'll talk to Karl. Start to finish.</h2>
+      <p style="margin:0;font-size:18px;line-height:1.6;color:#3d3a35;text-wrap:pretty">[Short intro — years of experience, number of clients, training.] I personally review your photos, run your consultation, and perform every treatment. The person you call is the person holding the needle.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;border-top:1px solid #d6d2c9;padding-top:20px">
+        <div><div style="font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:32px">[X]+</div><div style="font-size:13px;color:#5a564f">years</div></div>
+        <div><div style="font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:32px">[X]+</div><div style="font-size:13px;color:#5a564f">clients</div></div>
+        <div><div style="font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:32px">1</div><div style="font-size:13px;color:#5a564f">artist</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="05 What SMP Does" style="max-width:1200px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px">
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(34px,5vw,56px);line-height:1;text-transform:uppercase">What SMP does</h2>
+    <p style="margin:0;font-size:18px;line-height:1.6;color:#bdb8ae;text-wrap:pretty">Scalp micropigmentation places thousands of tiny, layered impressions in the scalp to recreate the look of hair follicles. The result reads as a fresh buzz cut or fuller hair, up close and in daylight.</p>
+  </div>
+  <div style="display:flex;flex-direction:column">
+    <sc-for list="{{ does }}" as="d" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:40px 1fr;gap:12px;padding:18px 0;border-top:1px solid #2a2825">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.8 0.07 70);padding-top:3px">{{ d.n }}</div>
+        <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:18px;font-weight:600">{{ d.t }}</div><div style="font-size:15px;color:#bdb8ae;line-height:1.5">{{ d.s }}</div></div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section data-screen-label="06 Who It's For" style="border-top:1px solid #22201d">
+  <div style="max-width:1200px;margin:0 auto;padding:64px 20px;display:flex;flex-direction:column;gap:28px">
+    <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(28px,4vw,40px);line-height:1;text-transform:uppercase">Who it's for · men &amp; women</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <sc-for list="{{ whoFor }}" as="w" hint-placeholder-count="7">
+        <div style="padding:12px 18px;border:1px solid #3a3733;font-size:16px;border-radius:2px">{{ w }}</div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="07 Process" style="background:#171614">
+  <div style="max-width:1200px;margin:0 auto;padding:80px 20px;display:flex;flex-direction:column;gap:40px">
+    <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(34px,5vw,56px);line-height:1;text-transform:uppercase">How it works</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:2px">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="background:#0f0e0d;padding:28px 24px;display:flex;flex-direction:column;gap:14px;min-height:200px">
+          <div style="font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:44px;color:oklch(0.8 0.07 70);line-height:1">{{ s.n }}</div>
+          <div style="font-size:19px;font-weight:600">{{ s.t }}</div>
+          <div style="font-size:15px;line-height:1.5;color:#bdb8ae">{{ s.s }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="08 Pricing" style="max-width:880px;margin:0 auto;padding:72px 20px;display:flex;flex-direction:column;gap:16px">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:oklch(0.8 0.07 70);text-transform:uppercase">Investment</div>
+  <p style="margin:0;font-size:clamp(22px,3vw,30px);line-height:1.35;text-wrap:pretty">Most treatments range from approximately <strong style="font-weight:600">$1,800–$3,500</strong>, depending on the amount of work required.</p>
+  <p style="margin:0;font-size:16px;line-height:1.6;color:#bdb8ae">Exact pricing is set after Karl reviews your scalp and goals during your free consultation. No pressure, no obligation.</p>
+</section>
+
+<section data-screen-label="09 Reviews" style="background:#f3f1ec;color:#151412">
+  <div style="max-width:1200px;margin:0 auto;padding:80px 20px;display:flex;flex-direction:column;gap:32px">
+    <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(34px,5vw,56px);line-height:1;text-transform:uppercase">What clients say</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px">
+      <sc-for list="{{ reviews }}" as="rv" hint-placeholder-count="4">
+        <div style="background:#fbfaf7;border:1px solid #e0dcd3;padding:28px;display:flex;flex-direction:column;gap:16px">
+          <div style="color:#8a6a2e;letter-spacing:2px;font-size:14px">★★★★★</div>
+          <div style="font-size:17px;line-height:1.55;color:#2a2825;text-wrap:pretty">"{{ rv.text }}"</div>
+          <div style="font-size:14px;font-weight:600">{{ rv.name }} <span style="font-weight:400;color:#6b665e">· {{ rv.src }}</span></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="consult" data-screen-label="10 Lead Form" style="max-width:1200px;margin:0 auto;padding:80px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:48px;align-items:start">
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(34px,5vw,56px);line-height:1;text-transform:uppercase">Request your free consultation</h2>
+    <p style="margin:0;font-size:18px;line-height:1.6;color:#bdb8ae;text-wrap:pretty">Tell me a little about your hair loss. I'll review it personally and call you, usually within one business day.</p>
+    <p style="margin:0;font-size:15px;color:#8a857c">Prefer to talk now? <a href="tel:4805550123" onClick="{{ trackCall }}">Call Karl · (480) 555-0123</a></p>
+  </div>
+
+  <div style="background:#171614;border:1px solid #2a2825;padding:clamp(20px,4vw,36px);display:flex;flex-direction:column;gap:24px">
+    <sc-if value="{{ twoStep }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="flex:1;height:3px;background:oklch(0.8 0.07 70)"></div>
+        <div style="flex:1;height:3px;background:{{ bar2 }}"></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#8a857c">Step {{ stepNum }} of 2</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showA }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:16px;font-weight:600">What are you looking to improve?</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px">
+          <sc-for list="{{ concernOpts }}" as="o" hint-placeholder-count="6">
+            <button onClick="{{ o.toggle }}" style="min-height:48px;padding:10px 14px;text-align:left;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:15px;cursor:pointer;border-radius:2px;font-family:inherit">{{ o.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:16px;font-weight:600">Current hairstyle</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+          <sc-for list="{{ styleOpts }}" as="o" hint-placeholder-count="3">
+            <button onClick="{{ o.toggle }}" style="min-height:48px;padding:10px;background:{{ o.bg }};color:{{ o.fg }};border:1px solid {{ o.bd }};font-size:15px;cursor:pointer;border-radius:2px;font-family:inherit">{{ o.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showB }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#bdb8ae">Name<input value="{{ name }}" onChange="{{ setName }}" autocomplete="name" style="min-height:50px;padding:0 14px;background:#0f0e0d;border:1px solid #3a3733;color:#f3f1ec;font-size:16px;border-radius:2px"></label>
+        <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#bdb8ae">Phone<input type="tel" value="{{ phone }}" onChange="{{ setPhone }}" autocomplete="tel" style="min-height:50px;padding:0 14px;background:#0f0e0d;border:1px solid #3a3733;color:#f3f1ec;font-size:16px;border-radius:2px"></label>
+      </div>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#bdb8ae">Email<input type="email" value="{{ email }}" onChange="{{ setEmail }}" autocomplete="email" style="min-height:50px;padding:0 14px;background:#0f0e0d;border:1px solid #3a3733;color:#f3f1ec;font-size:16px;border-radius:2px"></label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#bdb8ae">Photos of your scalp (front, top, crown) — optional
+        <div style="min-height:64px;border:1px dashed #55504a;display:flex;align-items:center;justify-content:center;padding:12px;color:#f3f1ec;font-size:15px;cursor:pointer">{{ photoLabel }}</div>
+        <input type="file" accept="image/*" multiple="multiple" onChange="{{ setPhotos }}" style="display:none">
+      </label>
+      <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;color:#bdb8ae">Anything else? — optional<textarea rows="3" value="{{ comments }}" onChange="{{ setComments }}" style="padding:12px 14px;background:#0f0e0d;border:1px solid #3a3733;color:#f3f1ec;font-size:16px;border-radius:2px;resize:vertical"></textarea></label>
+    </sc-if>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button onClick="{{ primaryAction }}" style="min-height:58px;background:oklch(0.8 0.07 70);color:#0f0e0d;border:none;font-weight:600;font-size:17px;cursor:pointer;border-radius:2px;font-family:inherit">{{ primaryLabel }}</button>
+      <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ back }}" style="min-height:44px;background:transparent;border:none;color:#8a857c;font-size:14px;cursor:pointer;font-family:inherit">← Back</button>
+      </sc-if>
+      <div style="font-size:13px;color:#8a857c;text-align:center">Free, no obligation. Your photos stay private.</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="11 Final CTA" style="border-top:1px solid #22201d">
+  <div style="max-width:880px;margin:0 auto;padding:96px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px">
+    <h2 style="margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:clamp(40px,6.5vw,72px);line-height:.95;text-transform:uppercase;text-wrap:balance">Ready to see what's possible?</h2>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
+      <button onClick="{{ goForm }}" style="min-height:56px;padding:0 28px;background:oklch(0.8 0.07 70);color:#0f0e0d;border:none;font-weight:600;font-size:17px;cursor:pointer;border-radius:2px;font-family:inherit">Get My Free Consultation</button>
+      <a href="tel:4805550123" onClick="{{ trackCall }}" style="display:flex;align-items:center;white-space:nowrap;flex-shrink:0;min-height:56px;padding:0 24px;border:1px solid #3a3733;color:#f3f1ec;font-size:16px;font-weight:500;border-radius:2px">Call Karl</a>
+    </div>
+  </div>
+  <footer style="max-width:1200px;margin:0 auto;padding:24px 20px;border-top:1px solid #22201d;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:#8a857c">
+    <div>[Brand] SMP · [Street address], Scottsdale, AZ</div>
+    <div>Privacy · Results vary by individual</div>
+  </footer>
+</section>
+
+<sc-if value="{{ sticky }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(15,14,13,.96);border-top:1px solid #2a2825;padding:10px 12px;display:grid;grid-template-columns:2fr 1fr;gap:8px">
+    <button onClick="{{ goForm }}" style="min-height:50px;background:oklch(0.8 0.07 70);color:#0f0e0d;border:none;font-weight:600;font-size:16px;cursor:pointer;border-radius:2px;font-family:inherit">Free Consultation</button>
+    <a href="tel:4805550123" onClick="{{ trackCall }}" style="display:flex;align-items:center;justify-content:center;min-height:50px;border:1px solid #3a3733;color:#f3f1ec;font-size:15px;font-weight:500;border-radius:2px">Call Karl</a>
+  </div>
+</sc-if>
+
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;formMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Two-step&quot;,&quot;Single-step&quot;],&quot;default&quot;:&quot;Two-step&quot;,&quot;tsType&quot;:&quot;'Two-step'|'Single-step'&quot;},&quot;stickyBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { step: 1, concerns: [], hairstyle: null, name: '', phone: '', email: '', comments: '', photos: [], submitted: false };
+  track(ev, data) { console.log('[track]', ev, data || ''); /* fbq('track', ev) / gtag('event', ev) */ }
+  opts(list, isSel, onPick) {
+    return list.map(label => {
+      const s = isSel(label);
+      return { label, bg: s ? 'oklch(0.8 0.07 70)' : '#0f0e0d', fg: s ? '#0f0e0d' : '#f3f1ec', bd: s ? 'oklch(0.8 0.07 70)' : '#3a3733', toggle: () => onPick(label) };
+    });
+  }
+  renderVals() {
+    const s = this.state, twoStep = (this.props.formMode ?? 'Two-step') === 'Two-step';
+    const sticky = this.props.stickyBar ?? true;
+    const goForm = () => { const el = document.getElementById('consult'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' }); };
+    const submit = () => { this.track('Lead', { concerns: s.concerns, hairstyle: s.hairstyle }); this.setState({ submitted: true }); window.scrollTo(0, 0); };
+    const onStep1 = twoStep && s.step === 1;
+    return {
+      submitted: s.submitted, notSubmitted: !s.submitted, sticky, stickyPad: sticky ? '72px' : '0',
+      firstName: (s.name.trim().split(' ')[0]) || 'there',
+      twoStep, stepNum: s.step, bar2: s.step === 2 ? 'oklch(0.8 0.07 70)' : '#2a2825',
+      showA: !twoStep || s.step === 1, showB: !twoStep || s.step === 2, showBack: twoStep && s.step === 2,
+      primaryLabel: onStep1 ? 'Continue →' : 'Request My Free Consultation',
+      primaryAction: onStep1 ? () => { this.track('FormStep1'); this.setState({ step: 2 }); } : submit,
+      back: () => this.setState({ step: 1 }),
+      reset: () => this.setState({ submitted: false, step: 1 }),
+      goForm, trackCall: () => this.track('CallClick'),
+      concernOpts: this.opts(['Receding hairline', 'Thinning hair', 'Crown', 'Significant hair loss', 'Full scalp', 'Other'], l => s.concerns.includes(l),
+        l => this.setState(p => ({ concerns: p.concerns.includes(l) ? p.concerns.filter(x => x !== l) : [...p.concerns, l] }))),
+      styleOpts: this.opts(['Shaved / buzzed', 'Short', 'Medium / long'], l => s.hairstyle === l, l => this.setState({ hairstyle: l })),
+      name: s.name, phone: s.phone, email: s.email, comments: s.comments,
+      setName: e => this.setState({ name: e.target.value }), setPhone: e => this.setState({ phone: e.target.value }),
+      setEmail: e => this.setState({ email: e.target.value }), setComments: e => this.setState({ comments: e.target.value }),
+      setPhotos: e => this.setState({ photos: [...e.target.files].map(f => f.name) }),
+      photoLabel: s.photos.length ? s.photos.length + ' photo' + (s.photos.length > 1 ? 's' : '') + ' attached' : '+ Add photos',
+      proofQuotes: [
+        { text: '[Short review excerpt — natural result]', name: '[Client name] · Google' },
+        { text: '[Short review excerpt — Karl / professionalism]', name: '[Client name] · Google' },
+        { text: '[Short review excerpt — confidence]', name: '[Client name] · Google' }
+      ],
+      results: ['[Receding hairline · 3 sessions]', '[Crown thinning]', '[Full scalp · Norwood 6]', '[Hairline framing]', '[Density · long hair]', '[Scar camouflage]', '[Receding hairline]', '[Full scalp]'],
+      does: [
+        { n: '01', t: 'Recreates the look of follicles', s: 'Layered pigment matched to your skin tone and natural hair color.' },
+        { n: '02', t: 'Adds visual density', s: 'Reduces scalp contrast behind thinning hair so it looks fuller.' },
+        { n: '03', t: 'Frames a natural hairline', s: 'Designed for your face, age and bone structure, never a straight line.' },
+        { n: '04', t: 'Works with your style', s: 'Shaved, buzzed, or longer thinning hair. Handles significant hair loss too.' }
+      ],
+      whoFor: ['Receding hairlines', 'Thinning hair', 'Crown thinning', 'Significant hair loss', 'Shaved / buzzed styles', 'Hairline framing', 'Density enhancement'],
+      steps: [
+        { n: '1', t: 'Submit photos', s: 'Send a few photos and your goals through the form below.' },
+        { n: '2', t: 'Free consultation', s: 'Karl calls you personally to talk through options and pricing.' },
+        { n: '3', t: 'Personalized treatment', s: 'Hairline, density and shade designed for you, over several sessions.' },
+        { n: '4', t: 'Final result', s: 'A natural, low-maintenance look you won\u2019t have to think about.' }
+      ],
+      reviews: [
+        { text: '[Full client testimonial mentioning natural results.]', name: '[Client]', src: 'Google' },
+        { text: '[Full client testimonial mentioning Karl personally.]', name: '[Client]', src: 'Google' },
+        { text: '[Full client testimonial mentioning professionalism.]', name: '[Client]', src: 'Google' },
+        { text: '[Full client testimonial — female client, thinning.]', name: '[Client]', src: 'Google' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
